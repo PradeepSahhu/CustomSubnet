@@ -310,6 +310,26 @@ Not only games but my Game `MortalGame` also provides Mechanism to buy, share or
       }
   ```
 
+## Withdraw Functin
+
+At certain scenerio, where the owner needs to withdraw all the funds, tokens or NFTs owner can do this thruogh withdraw functions.
+
+```Solidity
+
+  ///@notice : Owner will be able to withdraw all funds and NFTs from the contract in case of any problem
+    function withdrawAllTokens() external onlyOwner{
+        _transfer((address(this)), owner , balanceOf(address(this)));
+
+    }
+    function withAllEth() external onlyOwner{
+        (bool resMsg, ) = payable (owner).call{value:address(this).balance}("");
+        require(resMsg);
+    }
+    function withdrawAllNFT(uint _NFTID) external onlyOwner{
+         gameAsset.transferAsset(address(this), owner, _NFTID);
+    }
+```
+
 ## Complete Code
 
 ```Solidity
