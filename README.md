@@ -4,11 +4,16 @@
 
 ## Steps to Follow
 
-- avalanche subnet create mortalSubnet (chain ID : 10284) (Token Symbol : MST)
+- avalanche subnet create mortalSubnet (chain ID : 10284) (Token Symbol : MLG)
 - avalanche subnet deploy mortalSubnet
 - Importing the account & Copying the private key in the metamask.
 - Adding the network through RPC URL and chain ID
 - Interacting with the game using the REMIX IDE
+- For Better Interaction i downloaded contracts folder from openzepellin
+
+<img width="855" alt="image" src="https://github.com/PradeepSahhu/CustomSubnet/assets/94203408/94e1c7ab-cc77-4e5a-b32b-164c08b039c2">
+
+<img width="354" alt="image" src="https://github.com/PradeepSahhu/CustomSubnet/assets/94203408/030b353b-e3af-4215-9ecd-edf6908d3755">
 
 ## Objective
 
@@ -172,7 +177,7 @@ Actually what this function is doing is its checking if the caller is already in
 initial point that is 0 and mapping that index with its address in the mapping of leaderBoardIndex and setting true in inLeaderBoard mapping.
 
 ```Solidity
- function adjustRanking() public {
+   function adjustRanking() public {
         uint l = leaderBoard.length;
         if(l <= 1) return;
 
@@ -181,7 +186,9 @@ initial point that is 0 and mapping that index with its address in the mapping o
         }
     }
 
-   function quickSort(uint left, uint right) internal {
+    ///applying Quick sort. (implementing with the help of sorting technique of quickSort)
+
+     function quickSort(uint left, uint right) internal {
         if (left >= right) return;
 
         uint pivotIndex = (left + right) / 2;
@@ -190,10 +197,11 @@ initial point that is 0 and mapping that index with its address in the mapping o
         uint j = right;
 
         while (i <= j) {
-            while (leaderBoard[i].score > pivotValue) {
+            while (i< j && leaderBoard[i].score > pivotValue) {
                 i++;
             }
-            while (leaderBoard[j].score < pivotValue) {
+            while ( j >= 0 && leaderBoard[j].score < pivotValue) {
+                if(j==0) break;
                 j--;
             }
             if (i <= j) {
@@ -203,6 +211,7 @@ initial point that is 0 and mapping that index with its address in the mapping o
                  leaderBoardIndex[leaderBoard[i].playerAddress] = i;
                 leaderBoardIndex[leaderBoard[j].playerAddress] = j;
                 i++;
+                if(j==0) break;
                 j--;
             }
         }
@@ -657,10 +666,11 @@ function rewardTokens(address _receiver, uint _amount) external{
         uint j = right;
 
         while (i <= j) {
-            while (leaderBoard[i].score > pivotValue) {
+            while (i< j && leaderBoard[i].score > pivotValue) {
                 i++;
             }
-            while (leaderBoard[j].score < pivotValue) {
+            while ( j >= 0 && leaderBoard[j].score < pivotValue) {
+                if(j==0) break;
                 j--;
             }
             if (i <= j) {
@@ -670,6 +680,7 @@ function rewardTokens(address _receiver, uint _amount) external{
                  leaderBoardIndex[leaderBoard[i].playerAddress] = i;
                 leaderBoardIndex[leaderBoard[j].playerAddress] = j;
                 i++;
+                if(j==0) break;
                 j--;
             }
         }
